@@ -1,13 +1,6 @@
 import React from 'react';
 import * as API from '@api';
 
-/* TODO:
-Complete the UserProvider to manage user data and phone number masking.
-1. Fetch user data with API.me() on provider's mount.
-2. Implement a function to toggle phone number masking (you can fetch unmasked phone number with API.phone()
-3. Pass down the user data and the toggle function to the context value.
-*/
-
 const UserContext = React.createContext(null);
 
 interface UserProviderProps {
@@ -17,18 +10,28 @@ interface UserProviderProps {
 export const UserProvider = ({ children, ...props }: UserProviderProps) => {
   const [userName, setUserName] = React.useState('');
   const [userEmail, setUserEmail] = React.useState('');
-  const [userPhone, setUserPhone] = React.useState('');
+  const [userPhone, setUserPhone] = React.useState('*-***-***-****');
+  const [phoneMasked, setPhoneMasked] = React.useState(true);
+
+  const togglePhoneMasked = () => {setPhoneMasked(!phoneMasked)};
 
   const setUserData = React.useCallback(data => {
     setUserName(`${data.first_name} ${data.last_name}`)
     setUserEmail(data.email)
-    setUserPhone(data.masked_phone)
+  }, [])
+
+  const setPhoneData = React.useCallback(data => {
+    setUserPhone(data.phone)
   }, [])
 
   API.me().then(setUserData)
 
+  if (!phoneMasked) {
+    API.phone().then(setPhoneData)
+  }
+
   return (
-      <UserContext.Provider value={{userName, userEmail, userPhone}}>
+      <UserContext.Provider value={{userName, userEmail, userPhone, togglePhoneMasked}}>
         {children}
       </UserContext.Provider>
   );

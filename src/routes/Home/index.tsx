@@ -2,15 +2,11 @@ import React from 'react';
 import * as Theme from '@theme';
 import { UserProvider, useUser } from '@providers';
 
-/* TODO:
-3. Implement a way to unmask phone number using UserProvider's context.
-*/
-
 const cardStyle = {
   color: Theme.colors.primary
 }
 const Card = () => {
-  const {userName, userEmail, userPhone} = React.useContext(useUser)
+  const {userName, userEmail, userPhone, togglePhoneMasked} = React.useContext(useUser)
 
   return (
     <div id="card" style={cardStyle}>
@@ -25,6 +21,10 @@ const Card = () => {
       <p>
         Phone: {userPhone}
       </p>
+
+      <button onClick={() => togglePhoneMasked()}>
+        Mask/Unmask Phone Number
+      </button>
     </div>
   );
 }
@@ -40,7 +40,6 @@ const homeStyle = {
 
 const Home = () => {
     // todo: manage button state here
-
 
   return (
     <div id="home" style={homeStyle}>
