@@ -5,6 +5,12 @@ import { UserProvider, useUser } from '@providers';
 const cardStyle = {
   color: Theme.colors.primary
 }
+
+const buttonStyle = {
+    color: Theme.colors.primary,
+    border: `1px solid ${Theme.colors.primary} rounded`,
+}
+
 const Card = () => {
   const {userName, userEmail, userPhone, togglePhoneMasked} = React.useContext(useUser)
 
@@ -22,7 +28,7 @@ const Card = () => {
         Phone: {userPhone}
       </p>
 
-      <button onClick={() => togglePhoneMasked()}>
+      <button onClick={() => togglePhoneMasked()} style={buttonStyle}>
         Mask/Unmask Phone Number
       </button>
     </div>
