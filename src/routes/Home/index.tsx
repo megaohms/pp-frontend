@@ -38,16 +38,12 @@ const homeStyle = {
   alignItems: 'center'
 };
 
-const Home = () => {
-    // todo: manage button state here
-
-  return (
-    <div id="home" style={homeStyle}>
-      <UserProvider>
-        <Card />
-      </UserProvider>
-    </div>
-  );
-}
+const Home = () => (
+  <div id="home" style={homeStyle}>
+    <UserProvider>
+      <Card />
+    </UserProvider>
+  </div>
+);
 
 export default Home;

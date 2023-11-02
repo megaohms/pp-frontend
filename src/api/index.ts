@@ -7,16 +7,15 @@ const API_URL_ME = 'https://us-central1-internals-358114.cloudfunctions.net/reac
 const API_URL_PHONE = 'https://us-central1-internals-358114.cloudfunctions.net/react-challenge/phone';
 
 export const me = () => {
-    // GET https://us-central1-internals-358114.cloudfunctions.net/react-challenge/me
-    return fetch(API_URL_ME, {
-            headers: { Authorization: "Bearer WellTheoryCode2023" },
-        })
-        .then((response) => response.json())
+  return fetch(API_URL_ME, {
+      headers: { Authorization: "Bearer WellTheoryCode2023" },
+    })
+    .then((response) => response.json())
 };
 
 export const phone = () => {
-    return fetch(API_URL_PHONE, {
-        headers: { Authorization: "Bearer WellTheoryCode2023" },
+  return fetch(API_URL_PHONE, {
+      headers: { Authorization: "Bearer WellTheoryCode2023" },
     })
-        .then((response) => response.json())
+    .then((response) => response.json())
 };

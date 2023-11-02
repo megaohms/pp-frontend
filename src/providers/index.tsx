@@ -37,6 +37,5 @@ export const UserProvider = ({ children, ...props }: UserProviderProps) => {
   );
 }
 
-// todo: verify BPs here
 export const useUser = UserContext;
 
