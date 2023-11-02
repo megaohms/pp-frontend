@@ -14,10 +14,24 @@ interface UserProviderProps {
   children: React.ReactNode;
 };
 
-export const UserProvider = (props) => {
-  return null;
-};
+export const UserProvider = ({ children, ...props }: UserProviderProps) => {
+  const [userName, setUserName] = React.useState('');
+  const [userEmail, setUserEmail] = React.useState('');
 
-export const useUser = () => {
-  //
-};
+  const setUserData = React.useCallback(data => {
+    setUserName(`${data.first_name} ${data.last_name}`)
+    setUserEmail(data.email)
+  }, [])
+
+  API.me().then(setUserData)
+
+  return (
+      <UserContext.Provider value={{userName, userEmail}}>
+        {children}
+      </UserContext.Provider>
+  );
+}
+
+// todo: verify BPs here
+export const useUser = UserContext;
+

@@ -3,17 +3,24 @@ import * as Theme from '@theme';
 import { UserProvider, useUser } from '@providers';
 
 /* TODO:
-2. Display user's full name and their email. Use UserProvider's functionality (see providers.js)
 3. Display user's masked phone number, and implement a way to unmask it. Use UserProvider's context.
 */
+
+const cardStyle = {
+  color: Theme.colors.primary
+}
 const Card = () => {
-  const user = React.useContext(useUser)
+  const {userName, userEmail} = React.useContext(useUser)
 
   return (
-    <div id="card">
-      {user && (
-          <div id="userInfo">{user}</div>
-      )}
+    <div id="card" style={cardStyle}>
+      <p>
+        Name: {userName}
+      </p>
+
+      <p>
+        Email: {userEmail}
+      </p>
     </div>
   );
 }
@@ -28,11 +35,12 @@ const homeStyle = {
 };
 
 const Home = () => {
-  const [userNameData, setUserNameData] = React.useState('Megan Ring');
+    // todo: manage button state here
+
 
   return (
     <div id="home" style={homeStyle}>
-      <UserProvider value={[userNameData]}>
+      <UserProvider>
         <Card />
       </UserProvider>
     </div>
