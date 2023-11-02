@@ -3,14 +3,14 @@ import * as Theme from '@theme';
 import { UserProvider, useUser } from '@providers';
 
 /* TODO:
-3. Display user's masked phone number, and implement a way to unmask it. Use UserProvider's context.
+3. Implement a way to unmask phone number using UserProvider's context.
 */
 
 const cardStyle = {
   color: Theme.colors.primary
 }
 const Card = () => {
-  const {userName, userEmail} = React.useContext(useUser)
+  const {userName, userEmail, userPhone} = React.useContext(useUser)
 
   return (
     <div id="card" style={cardStyle}>
@@ -20,6 +20,10 @@ const Card = () => {
 
       <p>
         Email: {userEmail}
+      </p>
+
+      <p>
+        Phone: {userPhone}
       </p>
     </div>
   );
